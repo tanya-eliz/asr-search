@@ -1,0 +1,9 @@
+transformers
+datasets
+torch
+soundfile
+librosa
+fastapi
+uvicorn[standard]
+python-multipart
+pydub
