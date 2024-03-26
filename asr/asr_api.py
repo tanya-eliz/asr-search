@@ -27,7 +27,7 @@ def get_transcription_and_duration(file: UploadFile):
         f.write(audio_bytes)
     
     # load into dataset
-    ds = Dataset.from_dict({"audio": ["audio.wav"]}).cast_column("audio", Audio())
+    ds = Dataset.from_dict({"audio": ["audio.wav"]}).cast_column("audio", Audio(sampling_rate=16000))
     
     # Get duration
     audio = AudioSegment.from_file('audio.wav')
