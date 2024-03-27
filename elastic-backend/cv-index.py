@@ -31,7 +31,7 @@ es.indices.put_mapping(
         "down_votes": {"type": "integer"},
         "age": {"type": "text"},
         "gender": {"type": "keyword"},
-        "accent": {"type": "keyword"},
+        "accent": {"type": "text"},
         "duration": {"type": "float"},
         "generated_text": {"type": "text"},
         "text_completion": {"type": "completion"}
