@@ -32,7 +32,8 @@ function App() {
       search_fields: {
         generated_text:{},
         text: {},
-        age: {}
+        age: {},
+        accent: {}
       },
       result_fields: {
         text:{ snippet: {} },
@@ -115,11 +116,14 @@ function App() {
               <ErrorBoundary>
                 <Layout
                   header={
-                    <SearchBox autocompleteResults={{
-                      titleField: "text",
-                      urlField: "generated_text",
-                      shouldTrackClickThrough: true
-                    }} />
+                    <SearchBox 
+                        autocompleteResults={{
+                          titleField: "text",
+                          urlField: "generated_text",
+                          shouldTrackClickThrough: true
+                      }}
+                        searchAsYouType={true}
+                    />
                   }
                   sideContent={
                     <div>
