@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   ErrorBoundary,
   Facet,
@@ -12,12 +11,13 @@ import {
 } from "@elastic/react-search-ui";
 import {
   Layout,
-  Sorting
+  // Sorting
 } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 import { SearchDriverOptions } from "@elastic/search-ui";
 import './App.css'
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
+import {SingleSelectFacet} from "@elastic/react-search-ui-views";
 
 function App() {
   const connector = new ElasticsearchAPIConnector({
@@ -37,45 +37,29 @@ function App() {
       },
       result_fields: {
         text:{ snippet: {} },
-        generated_text: {},
+        generated_text: { snippet: {} },
         duration: {},
-        age: {},
+        age: { snippet: {} },
         gender: {},
-        accent: {}
+        accent: { snippet: {} }
       },
-      // disjunctiveFacets: ["genre.keyword", "actors.keyword", "directors.keyword"],
-      // facets: {
-      //   "genre.keyword": { type: "value" },
-      //   "actors.keyword": { type: "value" },
-      //   "directors.keyword": { type: "value" },
-      //   released: {
-      //     type: "range",
-      //     ranges: [
-      //       {
-      //         from: "2012-04-07T14:40:04.821Z",
-      //         name: "Within the last 10 years"
-      //       },
-      //       {
-      //         from: "1962-04-07T14:40:04.821Z",
-      //         to: "2012-04-07T14:40:04.821Z",
-      //         name: "10 - 50 years ago"
-      //       },
-      //       {
-      //         to: "1962-04-07T14:40:04.821Z",
-      //         name: "More than 50 years ago"
-      //       }
-      //     ]
-      //   },
-      //   imdbRating: {
-      //     type: "range",
-      //     ranges: [
-      //       { from: 1, to: 3, name: "Pants" },
-      //       { from: 3, to: 6, name: "Mediocre" },
-      //       { from: 6, to: 8, name: "Pretty Good" },
-      //       { from: 8, to: 10, name: "Excellent" }
-      //     ]
-      //   }
-      // }
+      disjunctiveFacets: ["gender", "duration"],
+      facets: {
+        gender: { type: "value" },
+        duration: {
+          type: "range",
+          ranges: [
+            { from : 0, to: 1, name: "0 to 1 minute" },
+            { from : 1, to: 2, name: "1 to 2 minutes" },
+            { from : 2, to: 3, name: "2 to 3 minutes" },
+            { from : 3.1, to: 5, name: "3 to 5 minutes" },
+            { from : 5.1, to: 10, name: "5 to 10 minutes" },
+            // { from : 10.1, to: 15, name: "10 to 15 minutes" },
+            // { from : 15.1, to: 20, name: "15 to 20 minutes" },
+            { from : 10.1, name: "Others" }, // to infinity 
+          ]
+        }
+      }
     },
     autocompleteQuery: {
       results: {
@@ -127,10 +111,13 @@ function App() {
                   }
                   sideContent={
                     <div>
-                      {/* {wasSearched && 
-                      <Sorting label={"Sort by"} sortOptions={}  />
-                      }
-                      <Facet key={"1"} field={"text.keyword"} label={"text"} /> */}
+                      <Facet field="gender" label="Gender" view={SingleSelectFacet} />
+                      <Facet
+                        field="duration"
+                        label="Duration"
+                        filterType="any"
+                      />
+                      
                     </div>
                   }
                   bodyContent={
