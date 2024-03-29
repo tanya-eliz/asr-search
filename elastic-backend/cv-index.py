@@ -5,8 +5,10 @@ from elasticsearch import Elasticsearch
 # Load data
 df = pd.read_csv('cv-valid-dev.csv')
 
-# Connect to local Elasticsearch
-es = Elasticsearch()
+# Connect to elasticsearch cluster hosted on AWS
+es = Elasticsearch(
+  host="http://ec2-13-229-61-124.ap-southeast-1.compute.amazonaws.com:9200"
+)
 
 index_name = 'cv-transcription'
 

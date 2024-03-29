@@ -21,7 +21,7 @@ import {SingleSelectFacet} from "@elastic/react-search-ui-views";
 
 function App() {
   const connector = new ElasticsearchAPIConnector({
-    host: "http://localhost:9200",
+    host: "http://ec2-13-229-61-124.ap-southeast-1.compute.amazonaws.com:9200",
     index: "cv-transcription"
   });
 
