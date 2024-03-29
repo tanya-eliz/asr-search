@@ -7,8 +7,11 @@ df = pd.read_csv('cv-valid-dev.csv')
 
 # Connect to elasticsearch cluster hosted on AWS
 es = Elasticsearch(
-  host="http://ec2-13-229-61-124.ap-southeast-1.compute.amazonaws.com:9200"
+  "http://ec2-13-229-61-124.ap-southeast-1.compute.amazonaws.com:9200"
 )
+
+# Connect to elasticsearch cluster hosted on local machine
+# es = Elasticsearch("http://localhost:9200")
 
 index_name = 'cv-transcription'
 

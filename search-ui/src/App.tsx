@@ -11,7 +11,6 @@ import {
 } from "@elastic/react-search-ui";
 import {
   Layout,
-  // Sorting
 } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 import { SearchDriverOptions } from "@elastic/search-ui";
@@ -22,6 +21,7 @@ import {SingleSelectFacet} from "@elastic/react-search-ui-views";
 function App() {
   const connector = new ElasticsearchAPIConnector({
     host: "http://ec2-13-229-61-124.ap-southeast-1.compute.amazonaws.com:9200",
+    // host: "http://localhost:9200",
     index: "cv-transcription"
   });
 
